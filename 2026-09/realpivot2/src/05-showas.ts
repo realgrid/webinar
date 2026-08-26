@@ -1,3 +1,5 @@
+import type { PivotBookConfiguration } from '../lib/realpivot2.js'
+
 const { setLogging, createDataSet, createCubeManager, createControl } = window.RealPivot2
 
 setLogging(false)
@@ -58,9 +60,12 @@ const cm = createCubeManager(ds, [
     },
 ])
 
-const config = {
+const config: PivotBookConfiguration = {
     general: {
         theme: 'light',
+    },
+    inspector: {
+        visible: false,
     },
     tables: [
         {

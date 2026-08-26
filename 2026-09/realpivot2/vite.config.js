@@ -27,9 +27,22 @@ function copyStaticAssets() {
     }
 }
 
+function useTypeScriptEntries() {
+    return {
+        name: 'use-typescript-entries',
+        enforce: 'pre',
+        transformIndexHtml(html) {
+            return html.replace(
+                /\.\/live-server\/(\d{2}-[^"']+)\.js/g,
+                './src/$1.ts',
+            )
+        },
+    }
+}
+
 export default defineConfig({
     base: './',
-    plugins: [copyStaticAssets()],
+    plugins: [useTypeScriptEntries(), copyStaticAssets()],
     server: {
         host: 'localhost',
         open: true,

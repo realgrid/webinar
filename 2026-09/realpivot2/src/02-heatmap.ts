@@ -1,3 +1,5 @@
+import type { PivotBookConfiguration } from '../lib/realpivot2.js'
+
 const { setLogging, createDataSet, createCubeManager, createControl } = window.RealPivot2
 
 setLogging(false)
@@ -56,14 +58,17 @@ const cm = createCubeManager(ds, [
     },
 ])
 
-const config = {
+const config: PivotBookConfiguration = {
     general: {
         theme: 'light',
     },
+    inspector: {
+        visible: false,
+    },
     tables: [
         {
-            name: '4 icon',
-            title: 'icon - traffic-3 로 등급 나누기',
+            name: '2 heatmap',
+            title: 'heatmap - 색으로 값의 분포 보기',
             cube: 'orders',
             emptyText: '-',
             fields: {
@@ -75,12 +80,11 @@ const config = {
                         aggregate: 'sum',
                         numberFormat: '#,##0',
                         width: 130,
-                        icon: {
+                        heatmap: {
                             visible: true,
-                            iconSet: 'traffic-3',
-                            compareScope: 'column',
-                            divideMode: 'value',
-                            thresholds: [30000, 50000],
+                            compareScope: 'all',
+                            // 연한 노랑 → 주황 → 빨강
+                            colors: ['#fef3c7', '#fdba74', '#dc2626'],
                         },
                     },
                 ],

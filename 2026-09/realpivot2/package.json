@@ -5,10 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "compile:live": "tsc --project tsconfig.live-server.json",
+    "live": "tsc --project tsconfig.live-server.json --watch"
   },
   "devDependencies": {
+    "typescript": "^7.0.2",
     "vite": "^7.3.6"
   }
 }

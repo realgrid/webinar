@@ -1,3 +1,5 @@
+import type { PivotBookConfiguration } from '../lib/realpivot2.js'
+
 const { setLogging, createDataSet, createCubeManager, createControl } = window.RealPivot2
 
 setLogging(false)
@@ -56,14 +58,17 @@ const cm = createCubeManager(ds, [
     },
 ])
 
-const config = {
+const config: PivotBookConfiguration = {
     general: {
         theme: 'light',
     },
+    inspector: {
+        visible: false,
+    },
     tables: [
         {
-            name: '3 highlight',
-            title: 'highlight - 열별 Top 2 · Bottom 2 · 평균 이상',
+            name: '1 dataBar',
+            title: 'dataBar - 열 안에서 상대 크기',
             cube: 'orders',
             emptyText: '-',
             fields: {
@@ -75,29 +80,10 @@ const config = {
                         aggregate: 'sum',
                         numberFormat: '#,##0',
                         width: 130,
-                        highlight: {
+                        dataBar: {
                             visible: true,
                             compareScope: 'column',
-                            ruleMode: 'first',
-                            rules: [
-                                {
-                                    type: 'top',
-                                    value: 2,
-                                    // 배경 연한 초록, 글자 진한 초록
-                                    style: { backgroundColor: '#ecfdf5', color: '#047857', bold: true },
-                                },
-                                {
-                                    type: 'bottom',
-                                    value: 2,
-                                    // 배경 연한 분홍, 글자 진한 빨강
-                                    style: { backgroundColor: '#fff1f2', color: '#be123c' },
-                                },
-                                {
-                                    type: 'aboveAvg',
-                                    // 글자 파랑
-                                    style: { color: '#1d4ed8' },
-                                }
-                            ],
+                            barOnly: false,
                         },
                     },
                 ],

@@ -7,7 +7,7 @@
 
 ## 예제
 
-발표 순서와 같은 일곱 개 화면입니다. 옵션은 각 `00`~`06` JS 파일에서 바로 고치면 됩니다.
+발표 순서와 같은 일곱 개 화면입니다. 옵션은 `src` 폴더의 각 `00`~`06` TypeScript 파일에서 바로 고치면 됩니다.
 
 | 파일 | 내용 |
 |---|---|
@@ -32,7 +32,7 @@ npm install
 npm run dev
 ```
 
-브라우저에서 `http://localhost:5173/`이 자동으로 열립니다. 발표 중 JS 파일을 저장하면 Vite가 화면을 바로 갱신합니다.
+브라우저에서 `http://localhost:5173/`이 자동으로 열립니다. 발표 중 `src/01-databar.ts` 같은 파일을 저장하면 Vite가 화면을 바로 갱신합니다. Vite는 TypeScript 원본을 직접 사용하므로 별도 컴파일 명령은 필요하지 않습니다.
 
 프로덕션 빌드와 빌드 결과 확인은 다음 명령을 사용합니다.
 
@@ -45,7 +45,15 @@ npm run preview
 
 ## Live Server로 실행
 
-Vite를 설치하지 않고 기존 방식으로도 실행할 수 있습니다. **파일로 직접 열면(`file://`) CSV와 ES 모듈이 막히므로** Live Server로 띄웁니다.
+기존 Live Server 방식으로도 실행할 수 있습니다. Live Server는 TypeScript를 직접 변환하지 못하므로 아래 명령으로 브라우저용 JS를 만들고 변경 사항을 감시합니다.
+
+```bash
+cd 2026-09/realpivot2
+npm install
+npm run live
+```
+
+`npm run live` 터미널을 실행해 둔 상태에서 `src`의 TypeScript 파일을 수정합니다. 컴파일 결과는 `live-server` 폴더에 자동 생성되며 이 파일들은 직접 수정하지 않습니다.
 
 ### 1. 확장 설치
 
@@ -70,8 +78,8 @@ VS Code / Cursor에서 [Live Server](https://marketplace.visualstudio.com/items?
 
 `http://localhost:5500/` 이어야 라이선스가 통과합니다.
 
-발표 중에 옵션을 바꿀 때는 해당 `01-databar.js` 같은 파일을 저장하면 Live Server가 새로고침합니다.
+발표 중에 옵션을 바꿀 때는 해당 `src/01-databar.ts` 같은 파일을 저장합니다. TypeScript 컴파일이 끝나면 Live Server가 화면을 새로고침합니다.
 
 ### 확인
 
-피벗이 안 그려지면 주소가 `file://`인지, Live Server 루트가 `realpivot2`인지 보면 됩니다.
+피벗이 안 그려지면 주소가 `file://`인지, Live Server 루트가 `realpivot2`인지, `npm run live`가 실행 중인지 보면 됩니다.
