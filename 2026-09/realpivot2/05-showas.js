@@ -1,24 +1,67 @@
-import { bootOrders } from './setup.js'
+const { setLogging, createDataSet, createCubeManager, createControl } = window.RealPivot2
 
-const { control, cm } = await bootOrders({
-    dimensions: [
+setLogging(false)
+
+const control = createControl(document, 'control')
+
+const ds = await createDataSet(
+    [
         {
-            name: '주문일',
-            source: 'Date',
-            type: 'date',
-            dateFields: ['월;month', '분기;quarter', '년도;year'],
+            name: 'ecommerceOrders',
+            sourceUrl: './asset/ecommerce-orders.csv',
+            sourceType: 'csv',
+            csvOptions: { quoted: true },
+            table: {
+                fields: [
+                    { name: 'OrderID', type: 'text' },
+                    { name: 'Date', type: 'date' },
+                    { name: 'CustomerID', type: 'text' },
+                    { name: 'Product', type: 'text' },
+                    { name: 'Quantity', type: 'number' },
+                    { name: 'UnitPrice', type: 'number' },
+                    { name: 'ShippingAddress', type: 'text' },
+                    { name: 'PaymentMethod', type: 'text' },
+                    { name: 'OrderStatus', type: 'text' },
+                    { name: 'TrackingNumber', type: 'text' },
+                    { name: 'ItemsInCart', type: 'number' },
+                    { name: 'CouponCode', type: 'text' },
+                    { name: 'ReferralSource', type: 'text' },
+                    { name: 'TotalPrice', type: 'number' },
+                ],
+            },
         },
-        { name: '상품', source: 'Product', type: 'str' },
     ],
-    measures: [
-        { name: '금액·순위', source: 'TotalPrice', type: 'f64', aggregate: 'sum' },
-        { name: '금액·비중', source: 'TotalPrice', type: 'f64', aggregate: 'sum' },
-        { name: '금액·누계', source: 'TotalPrice', type: 'f64', aggregate: 'sum' },
-    ],
-})
+    { indicator: 'progress', control },
+)
 
-control.loadBook(cm, {
-    general: { theme: 'light' },
+const cm = createCubeManager(ds, [
+    {
+        name: 'orders',
+        table: 'ecommerceOrders',
+        schema: {
+            dimensions: [
+                {
+                    name: '주문일',
+                    source: 'Date',
+                    type: 'date',
+                    dateFields: ['월;month', '분기;quarter', '년도;year'],
+                },
+                { name: '상품', source: 'Product', type: 'str' },
+            ],
+            measures: [
+                { name: '금액·순위', source: 'TotalPrice', type: 'f64', aggregate: 'sum' },
+                { name: '금액·비중', source: 'TotalPrice', type: 'f64', aggregate: 'sum' },
+                { name: '금액·누계', source: 'TotalPrice', type: 'f64', aggregate: 'sum' },
+            ],
+        },
+        columnar: true,
+    },
+])
+
+const config = {
+    general: {
+        theme: 'light',
+    },
     tables: [
         {
             name: '5 비중+막대',
@@ -61,4 +104,6 @@ control.loadBook(cm, {
             columnGrandTotal: { visible: true, position: 'end', fixed: true, label: '합계' },
         },
     ],
-})
+}
+
+control.loadBook(cm, config)
