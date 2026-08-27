@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- PDF 라이브러리 사용 -->
+        <script src="/pdfkit.js"></script>
+        <title>첫번째 데모 — 제품별 목록</title>
+    </head>
+    <body>
+        <header class="demo-header">
+            <a class="home-link" href="/">← 홈</a>
+            <h1>첫번째 데모 <span>제품별 목록</span></h1>
+            <div class="page-toggles">
+                <label><input type="checkbox" data-key="watermark" checked /> 워터마크</label>
+            </div>
+            <div class="view-tools">
+                <button id="btn-zoom-out" type="button" title="축소">−</button>
+                <button id="btn-zoom-in" type="button" title="확대">＋</button>
+                <span class="divider"></span>
+                <button id="btn-fit-width" type="button">너비맞춤</button>
+                <button id="btn-fit-height" type="button">높이맞춤</button>
+                <button id="btn-fit-page" type="button">화면맞춤</button>
+            </div>
+            <div class="toolbar">
+                <button id="btn-print" type="button">출력</button>
+                <button id="btn-pdf" type="button">PDF 출력</button>
+                <button id="btn-image" type="button">이미지(PNG)</button>
+            </div>
+        </header>
+
+        <!-- 리얼리포트 뷰어 표시 영역 -->
+        <div id="viewer"></div>
+        <script type="module" src="/src/demo-1.ts"></script>
+    </body>
+</html>
