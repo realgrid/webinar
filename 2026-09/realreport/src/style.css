@@ -1,32 +1,198 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #213547;
+  background-color: #f6f7f9;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
+  --accent-soft: #f1eafd;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
   margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-#app {
-  width: 100%;
-  height: 100%;
+.demo-header {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  min-height: 56px;
+  padding: 8px 20px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
 }
 
-@media (prefers-color-scheme: light) {
+.home-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.home-link:hover {
+  text-decoration: underline;
+}
+
+.demo-header h1 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.demo-header h1 span {
+  margin-left: 8px;
+  font-size: 13.5px;
+  font-weight: 400;
+  color: #6b7280;
+}
+
+.page-toggles {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 6px 14px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+}
+
+.page-toggles label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+}
+
+.page-toggles input {
+  accent-color: var(--accent);
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+/* 확대 · 축소 · 맞춤 뷰 컨트롤 — 헤더 가운데에 배치합니다. */
+.view-tools {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline: auto;
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.view-tools button {
+  border: none;
+  border-radius: 7px;
+  padding: 6px 10px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+#btn-zoom-out,
+#btn-zoom-in {
+  font-size: 15px;
+  font-weight: 700;
+  min-width: 32px;
+}
+
+.view-tools button:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.view-tools .divider {
+  width: 1px;
+  height: 18px;
+  margin: 0 4px;
+  background: #e5e7eb;
+}
+
+.toolbar {
+  display: flex;
+  gap: 8px;
+}
+
+.toolbar button {
+  border: none;
+  border-radius: 9px;
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #ffffff;
+  background: var(--accent);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.toolbar button:hover {
+  background: var(--accent-hover);
+}
+
+#viewer {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 16px;
+  background: lightgray;
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #1b1d21;
+
+    --accent: #a78bfa;
+    --accent-hover: #8b5cf6;
+    --accent-soft: rgba(139, 92, 246, 0.16);
+  }
+
+  .demo-header {
+    background: #24262b;
+    border-bottom-color: #33363d;
+  }
+
+  .demo-header h1 span {
+    color: #9ca3af;
+  }
+
+  .toolbar button {
+    color: #17131f;
+  }
+
+  .view-tools {
+    background: #24262b;
+    border-color: #33363d;
+  }
+
+  .view-tools .divider {
+    background: #33363d;
   }
 }

@@ -250,9 +250,10 @@
           "dataRow": {
             "name": "bandRow",
             "width": "100%",
-            "onGetStyles": "// 할인율이 있다면 서식 강조\n// \tconst isDiscount = ctx.getValue(\"tabular\", row, \"discount\");\n  \n//   if (isDiscount) {\n//     return { color: 'green', fontWeight: 'bold' }\n//   }",
+            "onGetStyles": "// 할인율이 있다면 서식 강조",
             "rowCount": 1,
             "fixed": false,
+            "minRowHeight": "30px",
             "cellStyles": {},
             "rows": [
               {}
@@ -275,6 +276,8 @@
               {
                 "r": 0,
                 "c": 3,
+                "onGetStyles": "",
+                "styleCallback": null,
                 "styles": {
                   "cellAlign": "right"
                 }
@@ -330,7 +333,8 @@
                 "value": "unitCost",
                 "width": "100%",
                 "name": "",
-                "onGetStyles": "// 1,000,000원 넘는 금액은 파랑 배경처리\n// \tif (value > 1_000_000) {\n//     return { background: 'lightblue' }\n//   }",
+                "onGetValue": "",
+                "onGetStyles": "",
                 "col": 3,
                 "row": 0,
                 "autoShrink": true,
@@ -338,13 +342,14 @@
                 "styles": {
                   "textAlign": "right",
                   "_tag_": {}
-                }
+                },
+                "styleCallback": null
               },
               {
                 "type": "text",
                 "value": "discount",
                 "name": "",
-                "onGetValue": "// 값이 비어있을 경우 \"-\"표시\n//   if (value === \"\") {\n//     return \"-\";\n//   }\n//",
+                "onGetValue": "if (value === \"\") {\n    return \"-\";\n  }",
                 "onGetStyles": "",
                 "col": 4,
                 "row": 0,
@@ -368,9 +373,9 @@
                 "multiLine": true,
                 "text": "Description",
                 "styles": {
+                  "textAlign": "left",
                   "paddingLeft": "2px",
-                  "_tag_": {},
-                  "textAlign": "left"
+                  "_tag_": {}
                 },
                 "styleCallback": null
               },
@@ -379,7 +384,8 @@
                 "width": 52,
                 "height": 52,
                 "name": "",
-                "onGetVisible": "// 할인율 데이터 따라 이미지 표기\n// \tconst isDiscount = ctx.getValue('tabular', row, 'discount');\n  \n//   if (isDiscount) {\n//     return true;\n//   }",
+                "visible": false,
+                "onGetVisible": "// 할인율 데이터 따라 이미지 표기\n \tconst isDiscount = ctx.getValue(\n \t  'tabular', row, 'discount'\n \t);",
                 "col": 6,
                 "row": 0,
                 "image": "image",
@@ -397,7 +403,7 @@
         "width": 417,
         "height": 215,
         "name": "",
-        "onGetVisible": "// 데이터에 따라 워터마크 표시\n\tconst isVisible = ctx.getValue('visible', row, 'watermark');\n  return isVisible;",
+        "onGetVisible": "// 데이터에 따라 워터마크 표시\n\tconst visible = ctx.getValue('visible', row, 'watermark');\n\t\n\treturn visible;",
         "image": "Logo",
         "styles": {
           "opacity": 0.6,
@@ -464,7 +470,7 @@
     "visible": {
       "type": "simple",
       "sample": {
-        "watermark": false
+        "watermark": true
       }
     }
   },
