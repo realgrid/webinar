@@ -22,7 +22,7 @@
 
 라이선스(`lib/realpivot2-lic.js`)는 `localhost`에서만 사용하실 수 있습니다.
 
-## Vite로 실행
+## 실행
 
 Node.js 20.19 이상 또는 22.12 이상이 필요합니다. 터미널에서 이 폴더로 이동한 뒤 의존성을 설치하고 개발 서버를 시작합니다.
 
@@ -32,7 +32,7 @@ npm install
 npm run dev
 ```
 
-브라우저에서 `http://localhost:5173/`이 자동으로 열립니다. 발표 중 `src/01-databar.ts` 같은 파일을 저장하면 Vite가 화면을 바로 갱신합니다. Vite는 TypeScript 원본을 직접 사용하므로 별도 컴파일 명령은 필요하지 않습니다.
+브라우저에서 `http://localhost:5173/`이 자동으로 열립니다. 발표 중 `src/01-databar.ts` 같은 파일을 저장하면 Vite가 화면을 바로 갱신합니다. TypeScript 원본을 직접 사용하므로 별도 컴파일 명령은 필요하지 않습니다.
 
 프로덕션 빌드와 빌드 결과 확인은 다음 명령을 사용합니다.
 
@@ -42,44 +42,3 @@ npm run preview
 ```
 
 `dist` 폴더에는 목록 화면과 `00`~`06` 예제 화면이 모두 생성됩니다. `npm run preview`를 실행하면 `http://localhost:4173/`에서 결과를 확인할 수 있습니다.
-
-## Live Server로 실행
-
-기존 Live Server 방식으로도 실행할 수 있습니다. Live Server는 TypeScript를 직접 변환하지 못하므로 아래 명령으로 브라우저용 JS를 만들고 변경 사항을 감시합니다.
-
-```bash
-cd 2026-09/realpivot2
-npm install
-npm run live
-```
-
-`npm run live` 터미널을 실행해 둔 상태에서 `src`의 TypeScript 파일을 수정합니다. 컴파일 결과는 `live-server` 폴더에 자동 생성되며 이 파일들은 직접 수정하지 않습니다.
-
-### 1. 확장 설치
-
-VS Code / Cursor에서 [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)를 설치합니다.
-
-상위 `webinar` 저장소 전체를 연 상태라면:
-
-1. VS Code 설정에서 Live Server 루트를 지정합니다.
-
-```json
-"liveServer.settings.root": "/2026-09/realpivot2"
-```
-
-2. 또는 이 `realpivot2` 폴더만 따로 엽니다. 이 폴더의 `.vscode/settings.json`에 Live Server 기본 페이지가 `index.html`로 들어 있습니다.
-
-### 2. 서버 시작
-
-- 탐색기에서 `index.html`을 우클릭 → **Open with Live Server**
-- 또는 상태 표시줄의 **Go Live**
-
-브라우저 주소가 `http://127.0.0.1:5500/`로 열리면 **호스트만 `localhost`로 바꿉니다.**
-
-`http://localhost:5500/` 이어야 라이선스가 통과합니다.
-
-발표 중에 옵션을 바꿀 때는 해당 `src/01-databar.ts` 같은 파일을 저장합니다. TypeScript 컴파일이 끝나면 Live Server가 화면을 새로고침합니다.
-
-### 확인
-
-피벗이 안 그려지면 주소가 `file://`인지, Live Server 루트가 `realpivot2`인지, `npm run live`가 실행 중인지 보면 됩니다.

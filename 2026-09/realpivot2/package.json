@@ -7,9 +7,7 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit",
-    "compile:live": "tsc --project tsconfig.live-server.json",
-    "live": "tsc --project tsconfig.live-server.json --watch"
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "typescript": "^7.0.2",
