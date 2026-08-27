@@ -10,7 +10,7 @@
                 "company": "백두산",
                 "model": "FA-210",
                 "unitCost": 139000,
-                "discount": "30",
+                "discount": "",
                 "description": "열전사, 9600bps, ADF5매, 발신자표시, 폴링"
             },
             {

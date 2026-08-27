@@ -31,14 +31,12 @@ export async function setupDemo(
   FontStore.defaultFont = 'NanumGothic';
 
   // 1. 양식파일 r2, 데이터셋 json을 불러옵니다.
-  const [reportForm, rawDataSet] = await Promise.all([
+  const [reportForm, dataSet] = await Promise.all([
     fetch(reportUrl).then((res) => res.json() as Promise<ReportForm>),
     dataUrl
       ? fetch(dataUrl).then((res) => res.json() as Promise<ReportDataSet>)
       : undefined,
   ]);
-
-  let dataSet = rawDataSet;
 
   // 2. 뷰어 객체 생성과 보고서 양식과 데이터셋 연결
   const viewer = new ReportViewer('viewer', reportForm, dataSet);
