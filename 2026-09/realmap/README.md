@@ -23,7 +23,7 @@
 |---|---|
 | `index.html` | 리얼맵 컨테이너 |
 | `src/main.ts` | 라이선스 등록 · 맵차트 설정 |
-| `public/kr-sido-low.geo.json` | 대한민국 시도 지도 |
+| `public/kr-sido-low.topo.json` | 대한민국 시도 지도 |
 | `public/kr-sido-density.json` | 시도별 인구밀도 데이터 |
 
 ## 실행

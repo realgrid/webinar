@@ -9,7 +9,7 @@ async function main() {
     setLicenseKey(lic);
     const config: ChartConfiguration = {
         map: {
-            url: '/kr-sido-low.geo.json',
+            url: '/kr-sido-low.topo.json',
             insets: ["백령도", "울릉도", "제주도"],
             padding: '0.1',
             dokdo: 0.2
