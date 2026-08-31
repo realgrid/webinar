@@ -90,16 +90,8 @@ const config: PivotBookConfiguration = {
                     dimension: '반기',
                     measure: '주문 금액',
                     width: 150,
-                    position: 'start',
                     renderer: { type: 'sparkbar' },
-                },
-                {
-                    name: 'byTotal',
-                    label: 'Trend\n(전 기간)',
-                    measure: '주문 금액',
-                    width: 170,
-                    renderer: { type: 'sparkline', lineColor: '#0f766e'},
-                },
+                }
             ],
         },
     ],

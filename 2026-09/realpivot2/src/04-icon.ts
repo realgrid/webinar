@@ -83,7 +83,6 @@ const config: PivotBookConfiguration = {
                         icon: {
                             visible: true,
                             iconSet: 'traffic-3',
-                            compareScope: 'column',
                             divideMode: 'value',
                             thresholds: [30000, 50000],
                         },
