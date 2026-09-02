@@ -250,7 +250,7 @@
           "dataRow": {
             "name": "bandRow",
             "width": "100%",
-            "onGetStyles": "// 할인율이 있다면 서식 강조",
+            "onGetStyles": "",
             "rowCount": 1,
             "fixed": false,
             "minRowHeight": "30px",
@@ -290,6 +290,7 @@
                 }
               }
             ],
+            "styleCallback": null,
             "items": [
               {
                 "type": "text",
@@ -335,6 +336,7 @@
                 "name": "",
                 "onGetValue": "",
                 "onGetStyles": "",
+                "blankFields": "ㅎㅇ",
                 "col": 3,
                 "row": 0,
                 "autoShrink": true,
@@ -349,8 +351,9 @@
                 "type": "text",
                 "value": "discount",
                 "name": "",
-                "onGetValue": "if (value === \"\") {\n    return \"-\";\n  }",
+                "onGetValue": "",
                 "onGetStyles": "",
+                "blankFields": "",
                 "col": 4,
                 "row": 0,
                 "suffix": "",
@@ -385,7 +388,7 @@
                 "height": 52,
                 "name": "",
                 "visible": false,
-                "onGetVisible": "// 할인율 데이터 따라 이미지 표기\n \tconst isDiscount = ctx.getValue(\n \t  'tabular', row, 'discount'\n \t);",
+                "onGetVisible": "// 할인율 데이터 따라 이미지 표기\n\tif (ctx.getValue('tabular', row, 'discount')) {\n\t  return true;\n\t}",
                 "col": 6,
                 "row": 0,
                 "image": "image",
@@ -470,7 +473,7 @@
     "visible": {
       "type": "simple",
       "sample": {
-        "watermark": true
+        "watermark": false
       }
     }
   },
