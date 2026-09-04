@@ -10,21 +10,21 @@
                 "company": "백두산",
                 "model": "FA-210",
                 "unitCost": 139000,
-                "discount": "",
+                "discount": "30",
                 "description": "열전사, 9600bps, ADF5매, 발신자표시, 폴링"
             },
             {
                 "company": "백두산",
                 "model": "FAX-B120",
                 "unitCost": 180000,
-                "discount": "",
+                "discount": "40",
                 "description": "잉크젯, 14.4kbps, ADF15매, 폴링"
             },
             {
                 "company": "백두산",
                 "model": "FAX-B120",
                 "unitCost": 180000,
-                "discount": "",
+                "discount": "90",
                 "description": "잉크젯, 14.4kbps, ADF15매, 폴링"
             },
             {

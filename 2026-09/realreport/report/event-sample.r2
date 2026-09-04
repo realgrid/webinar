@@ -250,7 +250,7 @@
           "dataRow": {
             "name": "bandRow",
             "width": "100%",
-            "onGetStyles": "",
+            "onGetStyles": "const isDiscount = ctx.getValue(\"tabular\", row, \"discount\");\n  \n  if (isDiscount) {\n    return { color: 'green', fontWeight: 'bold'}\n  }",
             "rowCount": 1,
             "fixed": false,
             "minRowHeight": "30px",
@@ -290,7 +290,6 @@
                 }
               }
             ],
-            "styleCallback": null,
             "items": [
               {
                 "type": "text",
@@ -334,7 +333,7 @@
                 "value": "unitCost",
                 "width": "100%",
                 "name": "",
-                "onGetValue": "",
+                "onGetValue": "if (value >= 1_000_000) {\n    return \"고가제품\";\n  }\n  \n  if (value >=500_000) {\n    return \"중간가 제품\";\n  }\n  \n  return \"저가 제품\";",
                 "onGetStyles": "",
                 "blankFields": "ㅎㅇ",
                 "col": 3,
@@ -351,7 +350,7 @@
                 "type": "text",
                 "value": "discount",
                 "name": "",
-                "onGetValue": "",
+                "onGetValue": "if (value === \"\") {\n    return \"-\";\n  }",
                 "onGetStyles": "",
                 "blankFields": "",
                 "col": 4,
@@ -388,7 +387,7 @@
                 "height": 52,
                 "name": "",
                 "visible": false,
-                "onGetVisible": "// 할인율 데이터 따라 이미지 표기\n\tif (ctx.getValue('tabular', row, 'discount')) {\n\t  return true;\n\t}",
+                "onGetVisible": "// 할인율 데이터 따라 이미지 표기\n\tconst isDiscount = ctx.getValue(\"tabular\", row, \"discount\");\n\t\n\tif (isDiscount) {\n\t  return true;\n\t}",
                 "col": 6,
                 "row": 0,
                 "image": "image",
@@ -406,7 +405,7 @@
         "width": 417,
         "height": 215,
         "name": "",
-        "onGetVisible": "// 데이터에 따라 워터마크 표시\n\tconst visible = ctx.getValue('visible', row, 'watermark');\n\t\n\treturn visible;",
+        "onGetVisible": "// 데이터에 따라 워터마크 표시\n\tconst isVisible = ctx.getValue(\"visible\", row, \"watermark\");\n\t\n\treturn isVisible;",
         "image": "Logo",
         "styles": {
           "opacity": 0.6,
@@ -473,7 +472,7 @@
     "visible": {
       "type": "simple",
       "sample": {
-        "watermark": false
+        "watermark": true
       }
     }
   },
