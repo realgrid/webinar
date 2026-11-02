@@ -8,3 +8,8 @@ declare namespace RealPivot2 {
     export type PivotCubeManager = import('../types/realpivot2').PivotCubeManager;
     export type PivotDataSet = import('../types/realpivot2').PivotDataSet;
 }
+
+// 2026-10-30 · 내보내기용으로 index.html에서 로드한 외부 라이브러리 전역 객체입니다.
+// RealPivot2.useAll()에 그대로 넘기기만 하므로 타입 패키지 없이 선언만 둡니다.
+declare const ExcelJS: object; // exceljs 4.4.0 (exceljs.min.js)
+declare const jspdf: object;   // jspdf 4.2.1 (jspdf.umd.min.js, window.jspdf.jsPDF)
