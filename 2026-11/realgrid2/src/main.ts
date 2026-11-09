@@ -43,7 +43,7 @@ function createGrid() {
         {
             name: 'name',
             fieldName: 'name',
-            width: 200,
+            width: 100,
             header: { text: '부서 / 담당자' },
             footer: { text: '전체 매출 합계' },
         },
@@ -59,22 +59,22 @@ function createGrid() {
             width: 80,
             header: { text: '직급' },
         },
-        {
-            name: 'region',
-            fieldName: 'region',
-            width: 80,
-            header: { text: '담당 권역' },
-        },
-        {
-            name: 'account',
-            fieldName: 'account',
-            width: 130,
-            header: { text: '주요 고객' },
-        },
+        // {
+        //     name: 'region',
+        //     fieldName: 'region',
+        //     width: 80,
+        //     header: { text: '담당 권역' },
+        // },
+        // {
+        //     name: 'account',
+        //     fieldName: 'account',
+        //     width: 130,
+        //     header: { text: '주요 고객' },
+        // },
         {
             name: 'target',
             fieldName: 'target',
-            width: 140,
+            width: 100,
             header: { text: '10월 목표 (만원)' },
             numberFormat: '#,##0',
             footer: { numberFormat: '#,##0' },
@@ -82,7 +82,7 @@ function createGrid() {
         {
             name: 'previousAmount',
             fieldName: 'previousAmount',
-            width: 140,
+            width: 100,
             header: { text: '9월 매출 (만원)' },
             numberFormat: '#,##0',
             footer: { numberFormat: '#,##0' },
@@ -90,7 +90,7 @@ function createGrid() {
         {
             name: 'amount',
             fieldName: 'amount',
-            width: 140,
+            width: 100,
             editable: true,
             header: { text: '10월 매출 (만원)' },
             numberFormat: '#,##0',
