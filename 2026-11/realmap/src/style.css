@@ -1,0 +1,175 @@
+:root {
+    color-scheme: dark;
+    --font-sans: 'Pretendard Variable', Pretendard, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    --bg: #070b14;
+    --card-bg: rgba(13, 20, 36, 0.92);
+    --border: rgba(148, 163, 184, 0.14);
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #7dd3fc;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 40px 24px;
+    /* 왼쪽 위·오른쪽 위에 푸른 빛이 번지는 어두운 배경 */
+    background:
+        radial-gradient(1000px 600px at 12% -12%, rgba(56, 189, 248, 0.14) 0%, transparent 60%),
+        radial-gradient(900px 560px at 105% 0%, rgba(129, 140, 248, 0.14) 0%, transparent 55%),
+        var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+}
+
+.card {
+    /* 발표 화면을 데모와 VS Code로 나눠 쓸 수 있게, 창이 좁으면 카드도 함께 줄어든다. */
+    max-width: 1120px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 28px 32px 22px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.6);
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(56, 189, 248, 0.12);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.eyebrow::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.card-header h1 {
+    margin: 12px 0 0;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.card-header p {
+    margin: 6px 0 0;
+    font-size: 15px;
+    color: var(--text-muted);
+}
+
+#realmap {
+    height: 720px;
+    margin-top: 12px;
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+}
+
+.card-footer button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 40px;
+    padding: 0 16px 0 12px;
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    border-radius: 999px;
+    background: rgba(30, 41, 59, 0.6);
+    color: var(--text);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.card-footer button svg {
+    width: 16px;
+    height: 16px;
+}
+
+.card-footer button:hover {
+    background: rgba(56, 189, 248, 0.14);
+    border-color: rgba(125, 211, 252, 0.5);
+}
+
+.card-footer button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.45);
+}
+
+.card-footer .hint {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+kbd {
+    padding: 1px 6px;
+    border: 1px solid #475569;
+    border-bottom-width: 2px;
+    border-radius: 6px;
+    background: #1e293b;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card-footer button {
+        transition: none;
+    }
+}
+
+/* 리얼맵 색. realmap-style.css의 .rm-root 변수보다 우선하도록 #realmap 아래에서 다시 지정한다. */
+#realmap .rm-control {
+    /* 카드 배경이 비치도록 차트 배경을 비운다. */
+    --rm-background: transparent;
+}
+
+#realmap .rm-root {
+    --rm-font-family: var(--font-sans);
+    --rm-text-fill: #e2e8f0;
+    --rm-point-label-fill: #e2e8f0;
+    --rm-tooltip-bg: #1e293b;
+    --rm-tooltip-border-color: #334155;
+    --rm-tooltip-color: #f1f5f9;
+    --rm-drilldown-text-fill: #f1f5f9;
+    --rm-drilldown-text-history-fill: #7dd3fc;
+    --rm-drilldown-separator-fill: #64748b;
+    --rm-color-scale-box-stroke: none;
+    --rm-color-scale-split-stroke: #0d1424;
+    --rm-color-scale-marker-fill: #e2e8f0;
+    --rm-color-scale-tick-line-stroke: #334155;
+    --rm-color-scale-tick-label-fill: #94a3b8;
+    --rm-color-scale-null-box-stroke: #475569;
+    --rm-map-series-inset-stroke: #334155;
+}
+
+/* 브레드크럼(드릴다운 패널 text 타입) */
+.rm-drilldown-text,
+.rm-drilldown-separator {
+    font-size: 15px;
+}
+
+.rm-drilldown-text {
+    font-weight: 700;
+}
