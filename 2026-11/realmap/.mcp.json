@@ -1,0 +1,8 @@
+{
+    "mcpServers": {
+        "real-mcp": {
+            "type": "http",
+            "url": "https://real-mcp.wooritech.com/mcp"
+        }
+    }
+}
