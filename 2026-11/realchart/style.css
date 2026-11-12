@@ -1,0 +1,33 @@
+* { box-sizing: border-box; }
+:root { color-scheme: dark; font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif; color: #edf3fc; background: #0c1420; font-synthesis: none; }
+body { margin: 0; }
+/* 720p 공유 화면에서 제목·조작부·네 칸·요약을 한 화면에 둡니다. */
+main { display: flex; flex-direction: column; height: 100dvh; min-height: 600px; max-width: 1680px; padding: 12px 24px; margin: 0 auto; }
+.page-header { display: flex; flex: none; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 10px; }
+h1 { font-size: 24px; letter-spacing: -.5px; margin: 3px 0; line-height: 1.2; }
+p { margin: 0; }
+.eyebrow { font-size: 12px; font-weight: 700; color: #72b0ff; }
+.subtitle { color: #b9c9dc; font-size: 12px; }
+button, select { font: inherit; font-size: 12px; border: 1px solid #32465f; border-radius: 6px; color: #dce9fa; padding: 8px 11px; background: #142237; cursor: pointer; }
+button:hover:not(:disabled), select:hover:not(:disabled) { border-color: #82baff; background: #1c3049; }
+button:focus-visible, select:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid #ffcf70; outline-offset: 3px; }
+button:disabled, select:disabled, input:disabled { cursor: default; opacity: .4; }
+button.primary { background: #245fab; border-color: #4389e6; }
+.toolbar, .toolbar-group { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.toolbar { flex: none; justify-content: space-between; margin-bottom: 8px; }
+input[type='checkbox'] { accent-color: #65aaff; }
+.chart-frame { flex: 1; min-height: 440px; background: #111c2b; border: 1px solid #344a64; border-radius: 9px; padding: 8px 14px 4px; overflow: hidden; }
+#chart { width: 100%; height: 100%; }
+#chart .rct-root { --rct-text-fill: #d5e1f0; --rct-axis-label-fill: #b7c9e1; --rct-axis-title-fill: #b8c8df; --rct-axis-grid-line-stroke: #22374e; --rct-axis-line-stroke: #415670; --rct-axis-tick-stroke: #415670; --rct-legend-label-fill: #c8d7e9; --rct-font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; --rct-background: #111c2b; --rct-text-annotation-fill: #f1f6fd; --rct-font-size: 12px; }
+#chart .rct-root text { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; }
+footer { display: flex; flex: none; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 8px 0 0; font-size: 12px; }
+#summary { color: #bbd1eb; }
+
+.chart-frame .rct-control, #chart.rct-control { background-color: #111c2b; --rct-background: #111c2b; }
+/* 좁은 화면에서는 가로 스크롤을 허용합니다. 발표할 때는 목록을 닫고 브라우저를 넓힙니다. */
+
+#chart .rct-text-annotation { fill: #dbe8f8; font-size: 13px; }
+/* 차트 가장자리에서 내용이 잘리지 않도록 합니다. */
+#chart, #chart .rct-control, #chart svg { overflow: visible; }
+/* 반반 화면: 데모 창이 좁으면 차트를 창에 맞추고 머리글을 숨깁니다. */
+@media (max-width: 1100px) { main { padding: 6px 8px; } .page-header { display: none; } .toolbar { gap: 8px; margin-bottom: 4px; } .chart-frame { min-height: 0; padding: 4px; } #chart .rct-text-annotation, #chart .rct-text-annotation * { font-size: 11px !important; } #chart .rct-text-annotation [style*="16px"] { font-size: 13.5px !important; } }

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RealChart Split · 웨비나 데모</title>
+  <link rel="icon" href="data:," />
+  <style>
+    :root { --bg: #0c1420; --panel: #111c2b; --border: #2a3c52; --text: #edf3fc; --muted: #8da0b9; --accent: #2eb8a2; --accent-soft: rgba(46, 184, 162, 0.16); --side: 270px; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif; }
+    .app { display: grid; grid-template-columns: var(--side) minmax(0, 1fr); grid-template-rows: 36px minmax(0, 1fr); height: 100%; }
+    .app.presenting { grid-template-columns: minmax(0, 1fr); }
+    .viewer-bar { grid-column: 1 / -1; display: flex; align-items: center; gap: 16px; padding: 4px 12px; border-bottom: 1px solid var(--border); }
+    .viewer-bar button { color: var(--text); background: var(--panel); border: 1px solid var(--border); padding: 3px 10px; border-radius: 4px; cursor: pointer; font: inherit; font-size: 12px; }
+    .viewer-bar button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    #current-title { font-size: 12px; color: var(--muted); }
+    .sidebar { display: flex; flex-direction: column; min-height: 0; border-right: 1px solid var(--border); background: var(--panel); }
+    .sidebar[hidden] { display: none; }
+    .sidebar-head { padding: 18px 16px 12px; border-bottom: 1px solid var(--border); }
+    .sidebar-head h1 { margin: 0; font-size: 15px; }
+    .sidebar-head p { margin: 6px 0 0; font-size: 12px; line-height: 1.45; color: var(--muted); }
+    #demo-list { flex: 1; overflow: auto; padding: 6px 8px 20px; }
+    .group { margin: 14px 8px 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: var(--muted); }
+    #demo-list button { display: block; width: 100%; margin-bottom: 4px; padding: 9px 12px; border: 1px solid transparent; border-radius: 8px; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+    #demo-list button:hover { background: rgba(255, 255, 255, 0.04); }
+    #demo-list button[aria-current="true"] { border-color: var(--accent); background: var(--accent-soft); }
+    .item-title { display: block; font-size: 14px; font-weight: 700; }
+    .item-meta { display: block; margin-top: 2px; font-size: 12px; color: var(--accent); }
+    .item-note { display: block; margin-top: 4px; font-size: 12px; line-height: 1.45; color: var(--muted); }
+    .sidebar-foot { padding: 12px 16px; border-top: 1px solid var(--border); font-size: 12px; line-height: 1.5; color: var(--muted); }
+    .sidebar-foot a { color: var(--accent); }
+    iframe { width: 100%; height: 100%; border: 0; background: var(--bg); }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="viewer-bar">
+      <button id="toggle-sidebar" aria-controls="sidebar" aria-expanded="true">목록 숨기기</button>
+      <span id="current-title"></span>
+    </div>
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-head">
+        <h1>RealChart Split 웨비나</h1>
+        <p>지표를 겹쳐 놓은 화면에서 시작해 칸 나누기, 제목·범례 배치, 공유 X축 활용, 상품·손익 추가, 선택 연결을 차례로 더합니다.</p>
+      </div>
+      <nav id="demo-list" aria-label="데모 목록"></nav>
+      <div class="sidebar-foot">↑ ↓ 키로 이동합니다.<br><a id="open" target="_blank" rel="noopener">이 데모만 새 탭으로 열기</a></div>
+    </aside>
+    <iframe id="frame" title="데모"></iframe>
+  </div>
+  <script type="module">
+    // 사이드바 목록
+    const groups = [
+      {
+        title: '웨비나 · 단계별 시작',
+        items: [
+          { id: '1-split', title: '1. 칸 나누기 · 시작', meta: '요청 1 전', note: '금액과 건수를 한 영역에 겹쳐 놓은 차트', url: './stages/1-split/' },
+          { id: '2-title-legend', title: '2. 제목·범례 배치 · 시작', meta: '요청 2 전', note: '1. 칸 나누기를 마친 상태', url: './stages/2-title-legend/' },
+          { id: '3-shared-xaxis', title: '3. 공유 X축 활용 · 시작', meta: '요청 3 전', note: '2. 제목·범례 배치를 마친 상태', url: './stages/3-shared-xaxis/' },
+          { id: '4-product-profit', title: '4. 상품·손익 추가 · 시작', meta: '요청 4 전', note: '3. 공유 X축 활용을 마친 상태', url: './stages/4-product-profit/' },
+          { id: '5-selection', title: '5. 선택 연결하기 · 시작', meta: '요청 5 전', note: '4. 상품·손익 추가를 마친 상태', url: './stages/5-selection/' },
+          { id: 'final', title: '완성 · 새 집계 반영', meta: '마무리', note: '5. 선택 연결하기를 마친 상태 · 주문 건수 라벨 · 40분·45분 갱신', url: './stages/final/' },
+        ],
+      },
+    ];
+
+    const items = groups.flatMap(g => g.items);
+    const list = document.querySelector('#demo-list');
+    const frame = document.querySelector('#frame');
+    const open = document.querySelector('#open');
+    const app = document.querySelector('.app');
+    const sidebar = document.querySelector('#sidebar');
+    const toggleSidebar = document.querySelector('#toggle-sidebar');
+    const currentTitle = document.querySelector('#current-title');
+    const params = new URLSearchParams(location.search);
+    let presenting = params.get('view') === 'present'
+      || (params.get('view') !== 'list' && matchMedia('(max-width: 1439px)').matches);
+    let current = 0;
+
+    function updateLocation() {
+      history.replaceState(null, '', `?demo=${items[current].id}&view=${presenting ? 'present' : 'list'}`);
+    }
+    function setPresentationMode() {
+      app.classList.toggle('presenting', presenting);
+      sidebar.hidden = presenting;
+      toggleSidebar.setAttribute('aria-expanded', String(!presenting));
+      toggleSidebar.textContent = presenting ? '목록 보기' : '목록 숨기기';
+      updateLocation();
+    }
+    toggleSidebar.onclick = () => { presenting = !presenting; setPresentationMode(); };
+
+    function show(index) {
+      current = Math.max(0, Math.min(items.length - 1, index));
+      const item = items[current];
+      frame.src = item.url;
+      open.href = item.url;
+      currentTitle.textContent = item.title;
+      list.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-current', String(i === current)));
+      list.querySelectorAll('button')[current].scrollIntoView({ block: 'nearest' });
+      updateLocation();
+    }
+
+    for (const group of groups) {
+      const head = document.createElement('div');
+      head.className = 'group';
+      head.textContent = group.title;
+      list.append(head);
+      for (const item of group.items) {
+        const index = items.indexOf(item);
+        const b = document.createElement('button');
+        b.innerHTML = `<span class="item-title">${item.title}</span>`
+          + (item.meta ? `<span class="item-meta">${item.meta}</span>` : '')
+          + `<span class="item-note">${item.note}</span>`;
+        b.onclick = () => show(index);
+        list.append(b);
+      }
+    }
+
+    // 데모 안을 클릭한 뒤에도 ↑↓로 이동합니다. 입력 요소에 포커스가 있으면 그 요소에 맡깁니다.
+    function onKey(e) {
+      if (['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) return;
+      if (e.key === 'ArrowDown') { e.preventDefault(); show(current + 1); }
+      if (e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+    }
+    document.addEventListener('keydown', onKey);
+    frame.addEventListener('load', () => frame.contentWindow.addEventListener('keydown', onKey));
+
+    const requested = params.get('demo');
+    show(Math.max(0, items.findIndex(i => i.id === requested)));
+    setPresentationMode();
+  </script>
+</body>
+</html>
