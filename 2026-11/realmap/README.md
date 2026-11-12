@@ -15,6 +15,8 @@ RealMap으로 드릴다운 맵차트 만들기
 | 드릴업 | `chart.drillup()` | Esc 키와 버튼으로 시도 지도로 돌아갑니다 |
 | 비교 막대 | `onPointClick` · `onDrilldown` · `onDrillup` · `addSeries` · `removeSeries` | 시군구를 클릭하면 막대 시리즈를 추가해 전국 · 시도 · 시군구 인구밀도를 비교합니다. 지시선(`callout`), 막대 라벨(`pointLabel` · `barLabel`), 선택 강조(`selection`)를 적용합니다 |
 
+발표 자료는 `2026-11-slides.pdf`입니다.
+
 ## 예제
 
 시작 화면과 완성 화면이 따로 있습니다. 발표에서는 시작 화면(`src/start.ts`)에 기능을 하나씩 더해 완성 화면(`src/main.ts`)을 만듭니다.
